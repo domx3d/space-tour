@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="icons/planet-earth-icon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Tour</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar orbitron">
+      <a href="/" class="navbar-brand">SPACE TOUR</a>
+      <div class="navbar-buttons">
+        <button class="navbar-button" id="nightMode">
+          <img class="btn-icon" src="icons/night-mode-icon.svg" alt="night mode"></img>
+        </button>
+        <button class="navbar-button" title="Developed with Three.js">
+          <img src="icons/info-icon.svg" alt="about" class="btn-icon"/>
+        </button>
+      </div>
+    </nav>
+    
+    <div class="overlay startScreen orbitron">
+      <div class="startText">
+        <p class="typed" id="welcomeText">Welcome to Space Tour!</p>
+        <p class="typed d1">Embark on a captivating journey through the celestial wonders</p>
+        <p class="typed d2">of our planetary neighborhood. Discover the mesmerizing beauty,</p>
+        <p class="typed d3"> intriguing facts, and awe-inspiring features of each planet.</p>  
+      </div>
+      <div id="loader">
+        <img src="icons/loading-gif.gif" alt="loading" class="btn-loading"/>
+      </div>
+      <p class="blink" id="anyKey">Press any key to continue...</p>
+    </div>
+
+    <div class="element" id="textBox" draggable="false">
+				<div class="symbol">
+          <h2 id="planetName" class="orbitron">Planet</h2>
+        </div>
+				<div class="facts">
+          <p id="fact1">fact1</p>
+          <p id="fact2">fact2</p>
+          <p id="fact3">fact3</p>
+        </div>
+		</div>
+    <div class="orbitron" id="bottom">
+      
+      <button class="arrow-btn" id="left-arrow">
+        <img class="btn-icon" src="icons/left-arrow.svg" alt="towards sun"></img>
+      </button>
+      <button id="returnButton">
+        <img class="btn-icon" src="icons/planet-earth-icon.svg" alt="earth"></img>
+      </button>
+      <button class="arrow-btn" id="right-arrow">
+        <img class="btn-icon" src="icons/right-arrow.svg" alt="from sun"></img>
+      </button>
+
+    </div>
+    <canvas id="c"></canvas>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
