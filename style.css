@@ -3,11 +3,12 @@ html, body {
   overflow: hidden;
 }
 
-#c {
+#main-canvas {
   width: 100vw;
   height: 100vh;
   display: block;
 }
+
 html
 {
   background-image: url("background/2k_stars.jpg")
@@ -30,6 +31,7 @@ html
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+  font-size: 1.2em;
   margin-right: auto;
   margin-left: 20px;
 }
