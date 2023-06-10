@@ -4,13 +4,20 @@ import TextBox from "./TextBox.js";
 import { resizeRendererToDisplaySize } from './Utils.js';
 import ButtonManager from './ButtonManager.js';
 
+// set background
+const body = document.querySelector('body');
+body.style.backgroundImage = 'url("background/2k_stars.jpg")';
+
 // variables
+let startX = 0;
+let distX = 0;
 let previousTime = 0;
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight
 }
-
+let portraitMode = (sizes.width <= sizes.height) ? 
+  false : true; // reversed so it sets it at the start
 
 // text box
 const textBox = new TextBox();
@@ -20,8 +27,6 @@ const buttonManager = new ButtonManager();
 
 // scene manager
 let sm = new SceneManager(textBox, buttonManager);
-
-
 
 
 // renderer
@@ -62,7 +67,12 @@ nightModeBtn.addEventListener('click', (event) => {
 
 // remove start screen
 document.addEventListener('keydown', function(event) {
-  sm.removeStartScreen();
+  if(sm.startScreen){
+    sm.removeStartScreen();
+  } else {
+    if(event.key === 'ArrowLeft') sm.moveLeftSection();
+    if(event.key === 'ArrowRight') sm.moveRightSection();
+  }
 });
 
 // reset rotation x when clicked on div textbox
@@ -92,15 +102,19 @@ document.addEventListener('wheel', debounce(handleWheel, 10));
 
 
 // mouse, pointer events
-document.addEventListener("mousemove", onMouseMove, false);
-document.addEventListener('pointerdown', onMouseDown, false);
-document.addEventListener('pointerup', onMouseup, false);
+document.addEventListener('mousedown', onMouseDown, false);
+document.addEventListener('mouseup', onMouseup, false);
 document.addEventListener('mouseleave', onMouseup,false);
+document.addEventListener("mousemove", onMouseMove, false);
+document.addEventListener('touchstart', onTouchDown, false);
+document.addEventListener('touchend', onTouchup, false);
+document.addEventListener("touchmove", onTouchMove, false);
+document.addEventListener('touchcancel', onMouseup, false);
 
 
 function onMouseDown(event) {
   sm.removeStartScreen();
-  // Calculate mouse position in normalized device coordinates
+  
   const mouse = new THREE.Vector2(
     (event.clientX / window.innerWidth) * 2 - 1,
     -(event.clientY / window.innerHeight) * 2 + 1
@@ -108,12 +122,39 @@ function onMouseDown(event) {
   sm.clickPlanet(mouse);
 }
 
+function onTouchDown(event) {
+  sm.removeStartScreen();
+
+  const touch = event.touches[0];
+  
+  startX = event.touches[0].clientX;  // for swipe 
+
+  const mouse = new THREE.Vector2(
+    (touch.clientX / window.innerWidth) * 2 - 1,
+    -(touch.clientY / window.innerHeight) * 2 + 1
+  );
+  sm.clickPlanet(mouse);
+}
+
 function onMouseup(event) {
-  if(sm.pressed){
     sm.pressed = false;
-    //mouseX_delta = 0;
-    //mouseY_delta = 0;
+}
+
+function onTouchup(event) {
+  // swipe
+  if (!sm.pressed && Math.abs(distX) > 200) {
+    if (distX > 0) {
+      // Right swipe move left
+      sm.moveLeftSection();
+    } else {      
+      // Left swipe move right
+      sm.moveRightSection();
+    }
   }
+  startX = 0;
+  distX = 0;
+
+  sm.pressed = false;
 }
 
 let prevMouseX = 0, prevMouseY = 0;
@@ -128,7 +169,25 @@ function onMouseMove(event) {
   deltaY = currentMouseY - prevMouseY;
   
   // Update the rotation based on the delta
-  sm.rotatePlanet(deltaX, deltaY)
+  sm.rotatePlanet(deltaX, deltaY, 2, 4)
+  
+  prevMouseX = currentMouseX;
+  prevMouseY = currentMouseY;
+}
+
+function onTouchMove(event) {
+  const touch = event.touches[0];
+  const currentMouseX = (touch.clientX / window.innerWidth) * 2 - 1;
+  const currentMouseY = -(touch.clientY / window.innerHeight) * 2 + 1;
+
+  deltaX = currentMouseX - prevMouseX;
+  deltaY = currentMouseY - prevMouseY;
+  
+  distX = touch.clientX - startX; // for swipe
+  
+  // some deltas are too big and it causes huge leaps in rotations
+  if(Math.abs(deltaX) < 0.05 && Math.abs(deltaY) < 0.05) 
+    sm.rotatePlanet(deltaX, deltaY, 1.5, 3);
   
   prevMouseX = currentMouseX;
   prevMouseY = currentMouseY;
@@ -145,9 +204,18 @@ function render(time) {
   
  
   if (resizeRendererToDisplaySize(renderer, sizes)) {
+      
       const canvas = renderer.domElement;
       sm.camera.aspect = canvas.clientWidth / canvas.clientHeight;
       sm.camera.updateProjectionMatrix();
+      
+      if(!portraitMode && sizes.width <= sizes.height) {
+        sm.setPortraitMode();
+        portraitMode = true;
+      } else if(portraitMode && sizes.width > sizes.height) {
+        sm.setLandscapeMode();
+        portraitMode = false;
+      }
   }
 
   sm.renderScene(deltaTime, prevMouseX, prevMouseY);

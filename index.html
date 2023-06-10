@@ -22,28 +22,42 @@
     </nav>
     
     <div class="overlay startScreen orbitron">
-      <div class="startText">
-        <p class="typed" id="welcomeText">Welcome to Space Tour!</p>
-        <p class="typed d1">Embark on a captivating journey through the celestial wonders</p>
-        <p class="typed d2">of our planetary neighborhood. Discover the mesmerizing beauty,</p>
-        <p class="typed d3"> intriguing facts, and awe-inspiring features of each planet.</p>  
+      <div class="startText desktop-start ">
+        <p class="typed  ad-25" id="welcomeText">Welcome to Space Tour!</p>
+        <p class="typed d11 ad-25">Embark on a captivating journey through the celestial wonders</p>
+        <p class="typed d12 ad-25">of our planetary neighborhood. Discover the mesmerizing beauty,</p>
+        <p class="typed d13 ad-25"> intriguing facts, and awe-inspiring features of each planet.</p>  
+      </div>
+      <div class="startText mobile-start ">
+        <p class="typed " id="welcomeText">Welcome to Space Tour!</p>
+        <p class="typed d21 ad-15">Embark on a captivating journey through</p>
+        <p class="typed d22 ad-15">the celestial wonders of our planetary </p>
+        <p class="typed d23 ad-15">neighborhood. Discover the mesmerizing </p>
+        <p class="typed d24 ad-15">beauty, intriguing facts, and awe-inspiring</p>
+        <p class="typed d25 ad-15">features of each planet.</p>  
       </div>
       <div id="loader">
         <img src="icons/loading-gif.gif" alt="loading" class="btn-loading"/>
       </div>
-      <p class="blink" id="anyKey">Press any key to continue...</p>
+      <div id="anyKey">
+        <p class="blink" >
+        <span id="anyKeyMobile">Touch to continue...</span>
+        <span id="anyKeyDesktop">Press any key to continue...</span>
+        </p>
+      </div>
     </div>
-
+    
     <div class="element" id="textBox" draggable="false">
-				<div class="symbol">
+        <div class="symbol">
           <h2 id="planetName" class="orbitron">Planet</h2>
         </div>
-				<div class="facts">
+        <div class="facts">
           <p id="fact1">fact1</p>
           <p id="fact2">fact2</p>
           <p id="fact3">fact3</p>
         </div>
-		</div>
+    </div>
+  
     <div class="orbitron" id="bottom">
       
       <button class="arrow-btn" id="left-arrow">

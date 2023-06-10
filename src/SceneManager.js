@@ -6,7 +6,7 @@ const sizes = {
   width: window.innerWidth,
   height: window.innerHeight
 }
-console.log(sizes)
+//console.log(sizes)
 
 
 class SceneManager {
@@ -128,10 +128,11 @@ class SceneManager {
     })})
   }
 
-  rotatePlanet(deltaX, deltaY) {
+  rotatePlanet(deltaX, deltaY, dx, dy) {
+   
     if(this.pressed) {
-      this.pressedPlanet.rotation.x += deltaY * 2;
-      this.pressedPlanet.rotation.y += deltaX * 4;
+      this.pressedPlanet.rotation.x += deltaY * dx;
+      this.pressedPlanet.rotation.y += deltaX * dy;
     }
   }
 
@@ -143,6 +144,7 @@ class SceneManager {
       if (intersects[0].object.type === 'Mesh') {
         this.pressed = true;
         this.pressedPlanet = intersects[0].object;
+        
       } 
     }
   }
@@ -200,19 +202,39 @@ class SceneManager {
         ease: 'slow(0.1, 0.1, false)', // Easing function
       });
     }
-  
-    
   }
 
   removeStartScreen() {
     if(this.startScreen && !this.loading) {
       document.querySelector('.startScreen').remove();
+      //document.querySelector('.startScreen').style = 'z-index: -1;'
       this.startScreen = false;
       this.goToSection(0);
       gsap.from(this.planets[4].scale, {z: 0.5, x: 0.5, y: 0.5, duration: 1.75, ease: "power2.out",})
+    }
+  } 
+
+  setPortraitMode() {
+    this.planets.forEach( (planet, i) => {
+      planet.position.set(
+        -4 * this.objectsDistance + i * this.objectsDistance,
+        0.75,
+        0
+      );
+      planet.scale.set(0.75, 0.75, 0.75)
+    })
   }
-  
-}
+
+  setLandscapeMode() {
+    this.planets.forEach( (planet, i) => {
+      planet.position.set(
+        -4 * this.objectsDistance + i * this.objectsDistance - 1.5,
+        0,
+        0
+      );
+      planet.scale.set(1.2,1.2,1.2)
+    })
+  }
 
   resetRotation() {
     gsap.to(this.planets[this.section+4].rotation, {x: 0, duration: 2, ease: "power1.out"})

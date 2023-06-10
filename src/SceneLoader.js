@@ -31,12 +31,12 @@ function loadScene(sceneManager) {
   // texture loader
   const texLoader = new THREE.TextureLoader(manager);
   
-  sceneManager.earthDayTex = texLoader.load('planets/2k_Earth.jpg')
-  sceneManager.earthNightTex = texLoader.load('planets/2k_earth_nightmap.jpg')
+  sceneManager.earthDayTex = texLoader.load('planets/2k_Earth.jpg');
+  sceneManager.earthNightTex = texLoader.load('planets/2k_earth_nightmap.jpg');
   
+
   // planets geometry
   const sphereGeometry = new THREE.SphereGeometry(1,128,128);
-
 
   // create planets
   for(let i = 0; i < sceneManager.planetNames.length; i++) {
@@ -51,7 +51,7 @@ function loadScene(sceneManager) {
 
     const mesh = new THREE.Mesh(sphereGeometry, material);
     
-    mesh.position.set(-4 * sceneManager.objectsDistance + i * sceneManager.objectsDistance - 1.5, 0, 0) // need change for mobile -> move to sm
+    mesh.position.set(-4 * sceneManager.objectsDistance + i * sceneManager.objectsDistance , 0, 0) // need change for mobile -> move to sm
     sceneManager.scene.add(mesh);
     sceneManager.planets.push(mesh);  
   
@@ -76,7 +76,7 @@ function loadScene(sceneManager) {
   }
 
   // particles
-  const particlesCount = 400;
+  const particlesCount = 600;
   const positions = new Float32Array(particlesCount * 3);
 
   for(let i = 0; i < particlesCount; i++)
@@ -86,7 +86,7 @@ function loadScene(sceneManager) {
     positions[i * 3 + 2] = (Math.random() - 1) * 20;  // z
   }
   
-  const particleSize =0.1;
+  const particleSize =0.05;
 
   const particlesGeometry = new THREE.BufferGeometry();
   particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));

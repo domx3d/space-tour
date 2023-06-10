@@ -1,18 +1,56 @@
+/* 
+
+TABLE OF CONTENT
+
+  1. global
+  2. navbar
+  2. text box
+  3. loading, any key
+  4. start screen
+  5. bottom
+  6. media queries
+  7. animations
+
+*/
+
+/* ===========
+    global
+  =============*/
+  
 html, body {
   margin: 0;
   overflow: hidden;
+  width: 100vw;
+  height: 100vh;
 }
 
 #main-canvas {
   width: 100vw;
   height: 100vh;
   display: block;
+  border-color: #f61111;
 }
 
-html
+body
 {
-  background-image: url("background/2k_stars.jpg")
+  background-color: #000000;
+  user-select: none; 
 }
+
+.orbitron {
+  font-family: 'Bangers', cursive;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.btn-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+/* ===========
+    navbar
+  =============*/
 
 .navbar {
   position: fixed;
@@ -31,7 +69,7 @@ html
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.4em;
   margin-right: auto;
   margin-left: 20px;
 }
@@ -45,165 +83,179 @@ html
   margin-right: 20px;
 }
 
-.btn-icon {
-  position: relative;
-  width: 20px;
-  height: 20px;
-}
+/* ==============
+    text box
+  =============== */
 
-#loader {
-  color: rgb(213, 37, 225);
-  text-align: center;
-  position: absolute;
-  margin: 20px;
-  bottom: 20%;
-}
+  .element {
+    display: block;
+    background-color: rgba(178, 227, 240, 0.33); 
+    position: absolute; 
+    opacity: 0;
+    pointer-events: auto; 
+    user-select: none; 
+    box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
+    border: 2px solid rgba(127,255,255,0.85);
+    border-radius: 18px;
+    text-align: center;
+    cursor: default; 
+  
+  }
+  
+  .element:hover {
+    box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
+    border: 2px solid rgba(127,255,255,1);
+  }
+  
+  .element .symbol h2 {
+  /*   position: sticky; */
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(255,255,255,0.75);
+    text-shadow: 0 0 10px rgba(0,255,255,0.95);
+  
+  }
+  
+  .element .facts {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    text-align: left;
+    margin-left: 4ch;
+    color: rgb(255, 255, 255);
+  }
+  
+  .facts p {
+    display: list-item;
+    font-family: sans-serif;
+    margin: 5px;
+  }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(69, 69, 69, 0.98);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-}
+/* =================
+  loading, any key
+  ================= */
 
-.overlay .startText {
-  width: 630px;
-  height: 480px;
-  resize: none;
-  padding: 5px;
-  font-size: 16px;
-  margin-top: 20px;
-  align-items: center;
-  justify-content: center;  
-}
-
-.startText p {
-  margin: 20px 0;
-  color: rgba(240, 248, 255, 0.916); 
-}
-
-#welcomeText {
-  color: rgb(138, 198, 251);
-  font-size: 32px;
-  margin-bottom: 50px;
-  animation-duration: 1.5s;
-}
-
-.typed {
-  overflow: hidden;
-  white-space: nowrap;
-  width: 0;
-  animation: typing;
-  animation-duration: 2.5s;
-  animation-timing-function: steps(100, end);
-  animation-fill-mode: forwards;
-}
-.typed.d1 {
-  animation-delay: 1.5s;
-}
-.typed.d2 {
-  animation-delay: 4s;
-}
-.typed.d3 {
-  animation-delay: 6.5s;
-}
-.btn-loading {
-  width: 20px;
-  height: 20px;
-}
-
+  .btn-loading {
+    width: 20px;
+    height: 20px;
+  }
+  
+  #loader {
+    color: rgb(213, 37, 225);
+    text-align: center;
+    position: absolute;
+    margin: 20px;
+    bottom: 20%;
+  }
 #anyKey {
+  position: absolute;
+  bottom:15vh;
+  left: 50%;
+  transform: translateX(-50%);
   color: aliceblue;
   text-align: center;
-  position: absolute;
-  bottom: 20%;
-  margin: 20px;
-  visibility: hidden;
+  font-size: 1em;
 }
 .blink {
   animation: blinker 3s linear infinite;
 }
 
-@keyframes blinker {
-  50% {
-    opacity: 0;
+/* ==============
+    start screen
+  =============== */
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(69, 69, 69, 0.98);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
   }
-}
+  
+  .startText {
+    position: absolute;
+    resize: none;
+    align-items: center;
+    justify-content: center;  
+  }
+  .desktop-start {
+    top: 20vh;
+    width: 50vw;
+    height: auto;
+    font-size: 1.2vw;
+    
+  }
+  .mobile-start {
+    top:20vh;
+    width: 80vw;
+    height: auto;
+    font-size: 3.5vw;
+  }
+  
+  .startText p {
+    margin: 20px 0;
+    color: rgba(240, 248, 255, 0.916); 
+  }
+  
+  #welcomeText {
+    color: rgb(138, 198, 251);
+    font-size: 1.6vw;
+    margin-bottom: 50px;
+    animation-duration: 1.5s;
+  }
+  .mobile-start #welcomeText {
+    font-size: 5vw;
+  }
+  
+  .typed {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typing;
+    
+    animation-timing-function: steps(100, end);
+    animation-fill-mode: forwards;
+  }
+  .ad-25 {
+    animation-duration: 2.5s;
+  }
+  .ad-15 {
+    animation-duration: 1.5s;
+  }
+  .typed.d11 {
+    animation-delay: 1.5s;
+  }
+  .typed.d12 {
+    animation-delay: 4s;
+  }
+  .typed.d13 {
+    animation-delay: 6.5s;
+  }
+  .typed.d21 {
+    animation-delay: 1.5s;
+  }
+  .typed.d22 {
+    animation-delay: 3s;
+  }
+  .typed.d23 {
+    animation-delay: 4.5s;
+  }
+  .typed.d24 {
+    animation-delay: 6s;
+  }
+  .typed.d25 {
+    animation-delay: 7.5s;
+  }
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-.element {
-  background-color: rgba(178, 227, 240, 0.33); 
-  position: absolute; 
-  top: 50%;
-  left: 50%;
-  transform: translate(20%, -50%);
-  opacity: 0;
-  /* margin-top: -10px; /* Adjust this value to control the vertical position */
-  /* margin-left: 180px; /* Adjust this value to control the horizontal position */ 
-  width: 340px; 
-  height: 300px;
-  pointer-events: auto; 
-	user-select: none; 
-  box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
-  border: 2px solid rgba(127,255,255,0.85);
-  border-radius: 18px;
-  text-align: center;
-  cursor: default; 
-}
-
-.element:hover {
-  box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
-  border: 2px solid rgba(127,255,255,1);
-}
-
-.element .number {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 12px;
-  color: rgba(127,255,255,0.75);
-}
-
-.element .symbol h2 {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  font-size: 36px;
-  font-weight: bold;
-  color: rgba(255,255,255,0.75);
-  text-shadow: 0 0 10px rgba(0,255,255,0.95);
-
-}
-
-.element .facts {
-  position: absolute;
-  bottom: 15px;
-  left: 20px;
-  right: 20px;
-  text-align: left;
-  font-size: 12px;
-  color: rgb(255, 255, 255);
-}
-
-.facts p {
-  display: list-item;
-}
-
-.orbitron {
-  font-family: 'Bangers', cursive;
-  font-family: 'Orbitron', sans-serif;
-}
+/* ===========
+    bottom 
+  =============*/
 
 #bottom {
   position: absolute;
@@ -241,6 +293,53 @@ button:active {
   animation: typing 1s steps(14), blink-caret 0.5s step-end infinite;
 }
 
+/* ==============
+    media queries 
+  =============== */
+
+@media (orientation: landscape) {
+  .element {
+    width: clamp(280px, 30vw, 560px);
+    height: clamp(200px, 50vh, 360px);
+    top: 50%;
+    left: 50%;
+    transform: translate(20%, -50%);
+    overflow: hidden;
+    font-size: clamp(1vh, 100%, 2vh);
+  }
+  .mobile-start {
+    display: none;
+  }
+  #anyKeyMobile {
+    display: none;
+  }
+  #anyKey {
+    bottom: clamp(20px,10vh,120px);
+  }
+}
+
+@media (orientation: portrait) {
+  .element {
+    width: clamp(200px, 80vw, 480px);
+    height: clamp(180px, 33vh, 460px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 15%);
+    overflow: auto;
+    font-size: 2vh;
+  }
+  .desktop-start {
+    visibility: hidden;
+  }
+  #anyKeyDesktop {
+    visibility: hidden;
+  }
+}
+
+/* ===========
+    animations 
+  =============*/
+
 @keyframes typing {
   from {
     width: 0;
@@ -257,4 +356,15 @@ button:active {
   50% {
     border-color: orange;
   }
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
 }
