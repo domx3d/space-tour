@@ -37,7 +37,9 @@ const renderer = new THREE.WebGLRenderer({canvas,
   //outputColorSpace: THREE.SRGBColorSpace,
   //toneMapping: THREE.LinearToneMapping
 });
-renderer.toneMappingExposure = 0.5;
+//renderer.toneMappingExposure = 0.5;
+/* renderer.gammaFactor = 2.2;
+renderer.outputColorSpace = THREE.SRGBColorSpace; */
 
 
 // return to earth button
@@ -80,6 +82,17 @@ document.getElementById('textBox').onclick = () => {
   sm.resetRotation();
 }
 
+// info section
+const infoButton = document.getElementById('infoBtn');
+const infoDiv = document.querySelector('.info');
+const infoEsc = document.querySelector('.esc');
+
+infoButton.addEventListener('click', function() {
+  infoDiv.style.display = 'block';
+});
+infoEsc.addEventListener('click', function() {
+  infoDiv.style.display = 'none';
+});
 
 // Debounce function
 function debounce(func, delay) {

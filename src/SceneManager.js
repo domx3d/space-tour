@@ -50,6 +50,11 @@ class SceneManager {
     this.cameraGroup = new THREE.Group()
     this.scene.add(this.cameraGroup)
 
+    //light
+    this.light = new THREE.AmbientLight("#ffffff");
+    this.light.position.set(0, 0, 15);
+    this.scene.add(this.light)
+
     // raycaster
     this.raycaster = new THREE.Raycaster();
 
@@ -143,8 +148,7 @@ class SceneManager {
       //console.log(intersects[0].object)
       if (intersects[0].object.type === 'Mesh') {
         this.pressed = true;
-        this.pressedPlanet = intersects[0].object;
-        
+        this.pressedPlanet = intersects[0].object;      
       } 
     }
   }

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 function loadScene(sceneManager) {
 
@@ -34,18 +35,17 @@ function loadScene(sceneManager) {
   sceneManager.earthDayTex = texLoader.load('planets/2k_Earth.jpg');
   sceneManager.earthNightTex = texLoader.load('planets/2k_earth_nightmap.jpg');
   
-
   // planets geometry
   const sphereGeometry = new THREE.SphereGeometry(1,128,128);
 
   // create planets
   for(let i = 0; i < sceneManager.planetNames.length; i++) {
-  
+    const map = texLoader.load('planets/2k_'+sceneManager.planetNames[i]+'.jpg');
+    //map.colorSpace = THREE.SRGBColorSpace;
     const material = new THREE.MeshBasicMaterial({
       map: (sceneManager.planetNames[i] == 'Earth') ? 
-        sceneManager.earthDayTex :
-        texLoader.load('planets/2k_'+sceneManager.planetNames[i]+'.jpg'),
-      color: '#aaa',
+        sceneManager.earthDayTex : map,
+      //color: '#aaa',
       //encoding: THREE.SRGBColorSpace
     });
 

@@ -4,24 +4,23 @@ TABLE OF CONTENT
 
   1. global
   2. navbar
-  2. text box
-  3. loading, any key
-  4. start screen
-  5. bottom
-  6. media queries
-  7. animations
+  3. info
+  4. text box
+  5. loading, any key
+  6. start screen
+  7. bottom
+  8. media queries
+  9. animations
 
 */
 
 /* ===========
-    global
+   1. global
   =============*/
   
 html, body {
   margin: 0;
   overflow: hidden;
-  width: 100vw;
-  height: 100vh;
 }
 
 #main-canvas {
@@ -49,7 +48,7 @@ body
 }
 
 /* ===========
-    navbar
+  2.  navbar
   =============*/
 
 .navbar {
@@ -84,7 +83,63 @@ body
 }
 
 /* ==============
-    text box
+   3.   info
+  =============== */
+
+.info {
+  display: none;
+  position: absolute;
+  right: 1px;
+  top: 10%;
+  width: clamp(300px, 60vw, 1000px);
+  height: 75vh;
+  background-color: rgba(39, 38, 38, 0.99);
+  z-index: 99;
+  border-radius: 10px;
+  border:#b0aeae 1px solid;
+  padding: 10px;
+  overflow:hidden;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  color: #b7b7b7;
+  text-align: left;
+  font-size: 1.5vh;
+}
+
+.info-text h3 {
+  color: rgb(177, 255, 255);
+  font-size: 1.6em;
+}
+
+.info-text p{
+  font-size: 1.2em;
+  margin-left: 20px;
+}
+
+.info-list {
+  display: list-item;
+  margin-left: 40px !important;
+}
+
+.esc {
+  padding:10px;
+  position: absolute;
+  top: 2vh;
+  right: 2vw;
+  border-radius: 50%;
+}
+.esc:hover {
+  outline: rgba(0,255,255,0.5) 2px solid;
+}
+.esc img {
+  height: 1.8em;
+  width: 1.8em;
+}
+/* ==============
+  4.  text box
   =============== */
 
   .element {
@@ -133,7 +188,7 @@ body
   }
 
 /* =================
-  loading, any key
+  5. loading, any key
   ================= */
 
   .btn-loading {
@@ -162,7 +217,7 @@ body
 }
 
 /* ==============
-    start screen
+  6.  start screen
   =============== */
 
   .overlay {
@@ -254,7 +309,7 @@ body
   }
 
 /* ===========
-    bottom 
+  7.  bottom 
   =============*/
 
 #bottom {
@@ -294,7 +349,7 @@ button:active {
 }
 
 /* ==============
-    media queries 
+  8.  media queries 
   =============== */
 
 @media (orientation: landscape) {
@@ -337,7 +392,7 @@ button:active {
 }
 
 /* ===========
-    animations 
+  9.  animations 
   =============*/
 
 @keyframes typing {

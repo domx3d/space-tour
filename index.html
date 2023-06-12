@@ -9,13 +9,14 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
+  <div class="main-container">
     <nav class="navbar orbitron">
       <a href="/" class="navbar-brand">SPACE TOUR</a>
       <div class="navbar-buttons">
-        <button class="navbar-button" id="nightMode">
+        <button class="navbar-button" id="nightMode" title="Night mode">
           <img class="btn-icon" src="icons/night-mode-icon.svg" alt="night mode"></img>
         </button>
-        <button class="navbar-button" title="Developed with Three.js">
+        <button class="navbar-button" id="infoBtn" title="Info">
           <img src="icons/info-icon.svg" alt="about" class="btn-icon"/>
         </button>
       </div>
@@ -46,6 +47,28 @@
         </p>
       </div>
     </div>
+
+    <div class="info">
+      <div class="esc">
+        <img src="icons/cross.svg" alt="about" class="btn-icon"/>
+      </div>
+      <div class="info-text">
+        <h3 class="orbitron">INSTRUCTIONS</h3>
+        
+        <p>To navigate the scene in this application, you have multiple options at your disposal. </p>
+          
+          <p class="info-list">Use the mouse wheel for smooth movement.</p>
+          <p class="info-list">Click the navigation buttons at the bottom.</p>
+          <p class="info-list">On touch devices, swipe left or right (swiping on the planet - rotation).</p>
+       
+        <h3 class="orbitron">CREDITS</h3>
+        <p>Created with: vanilla JS + Three.js</p>
+        <p>Text: ChatGPT</p>
+        <p>Planet textures: NASA ( https://www.solarsystemscope.com/textures/ )</p>
+        <p>Icons: ( https://www.svgrepo.com/ )</p>
+      </div>
+
+    </div>
     
     <div class="element" id="textBox" draggable="false">
         <div class="symbol">
@@ -64,14 +87,16 @@
         <img class="btn-icon" src="icons/left-arrow.svg" alt="towards sun"></img>
       </button>
       <button id="returnButton">
-        <img class="btn-icon" src="icons/planet-earth-icon.svg" alt="earth"></img>
+        <img class="btn-icon" src="icons/planet-earth-icon.svg" alt="earth" title="Return to Earth"></img>
       </button>
       <button class="arrow-btn" id="right-arrow">
         <img class="btn-icon" src="icons/right-arrow.svg" alt="from sun"></img>
       </button>
 
     </div>
+
     <canvas id="main-canvas"></canvas>
+  </div>
     <script type="module" src="src/Main.js"></script>
   </body>
 </html>
