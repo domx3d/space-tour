@@ -33,7 +33,9 @@ function loadScene(sceneManager) {
   const texLoader = new THREE.TextureLoader(manager);
   
   sceneManager.earthDayTex = texLoader.load('planets/2k_Earth.jpg');
+  sceneManager.earthDayTex.colorSpace = THREE.SRGBColorSpace;
   sceneManager.earthNightTex = texLoader.load('planets/2k_earth_nightmap.jpg');
+  sceneManager.earthNightTex.colorSpace = THREE.SRGBColorSpace;
   
   // planets geometry
   const sphereGeometry = new THREE.SphereGeometry(1,128,128);
@@ -41,7 +43,8 @@ function loadScene(sceneManager) {
   // create planets
   for(let i = 0; i < sceneManager.planetNames.length; i++) {
     const map = texLoader.load('planets/2k_'+sceneManager.planetNames[i]+'.jpg');
-    //map.colorSpace = THREE.SRGBColorSpace;
+    map.colorSpace = THREE.SRGBColorSpace;
+    
     const material = new THREE.MeshBasicMaterial({
       map: (sceneManager.planetNames[i] == 'Earth') ? 
         sceneManager.earthDayTex : map,

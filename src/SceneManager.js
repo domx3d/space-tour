@@ -58,7 +58,7 @@ class SceneManager {
     // raycaster
     this.raycaster = new THREE.Raycaster();
 
-    this.camera = new THREE.PerspectiveCamera(45, 2, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(45, 2, 0.1, 100);
     this.camera.position.z = 5;
     this.cameraGroup.add(this.camera);
 

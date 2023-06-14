@@ -37,6 +37,7 @@ const renderer = new THREE.WebGLRenderer({canvas,
   //outputColorSpace: THREE.SRGBColorSpace,
   //toneMapping: THREE.LinearToneMapping
 });
+renderer.setPixelRatio(window.devicePixelRatio);
 //renderer.toneMappingExposure = 0.5;
 /* renderer.gammaFactor = 2.2;
 renderer.outputColorSpace = THREE.SRGBColorSpace; */
@@ -88,10 +89,23 @@ const infoDiv = document.querySelector('.info');
 const infoEsc = document.querySelector('.esc');
 
 infoButton.addEventListener('click', function() {
-  infoDiv.style.display = 'block';
+  //infoDiv.style.display = 'block';
+  if(!infoDiv.classList.contains('fly-in')) {
+    infoDiv.classList.add('fly-in');
+  } else {
+    infoDiv.classList.remove('fly-in');
+    infoDiv.classList.add('fly-out');
+  }
 });
 infoEsc.addEventListener('click', function() {
-  infoDiv.style.display = 'none';
+  infoDiv.classList.remove('fly-in');
+  infoDiv.classList.add('fly-out');
+});
+
+infoDiv.addEventListener('transitionend', function(event) {
+  if (event.propertyName === 'transform' && infoDiv.classList.contains('fly-out')) {
+    infoDiv.classList.remove('fly-out');
+  }
 });
 
 // Debounce function
