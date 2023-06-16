@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+import { MathUtils, Scene, Group, 
+  AmbientLight, Raycaster, PerspectiveCamera  } from 'three';
 import { gsap } from 'gsap';
 import loadScene from './SceneLoader.js';
 
@@ -44,21 +45,21 @@ class SceneManager {
   initScene() {
 
     // scene
-    this.scene = new THREE.Scene();
+    this.scene = new Scene();
 
     // camera
-    this.cameraGroup = new THREE.Group()
+    this.cameraGroup = new Group()
     this.scene.add(this.cameraGroup)
 
     //light
-    this.light = new THREE.AmbientLight("#ffffff");
+    this.light = new AmbientLight("#ffffff");
     this.light.position.set(0, 0, 15);
     this.scene.add(this.light)
 
     // raycaster
-    this.raycaster = new THREE.Raycaster();
+    this.raycaster = new Raycaster();
 
-    this.camera = new THREE.PerspectiveCamera(45, 2, 0.1, 100);
+    this.camera = new PerspectiveCamera(45, 2, 0.1, 100);
     this.camera.position.z = 5;
     this.cameraGroup.add(this.camera);
 
@@ -66,11 +67,10 @@ class SceneManager {
   }
 
   renderScene(deltaTime, x, y)  {
-    
     // rotate planets
     if(this.planets.length > 0 && !this.pressed) {
       this.planets.forEach((planet) => {
-        planet.rotation.y += 0.0015;
+        planet.rotation.y += MathUtils.degToRad(5) * deltaTime;
       })
     }
 

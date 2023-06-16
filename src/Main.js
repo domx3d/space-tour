@@ -34,13 +34,8 @@ const canvas = document.querySelector('#main-canvas');
 const renderer = new THREE.WebGLRenderer({canvas, 
   antialias: true, 
   alpha: true, 
-  //outputColorSpace: THREE.SRGBColorSpace,
-  //toneMapping: THREE.LinearToneMapping
 });
 renderer.setPixelRatio(window.devicePixelRatio);
-//renderer.toneMappingExposure = 0.5;
-/* renderer.gammaFactor = 2.2;
-renderer.outputColorSpace = THREE.SRGBColorSpace; */
 
 
 // return to earth button
@@ -224,7 +219,7 @@ function onTouchMove(event) {
 /*                                    render                                                */
 
 function render(time) {
-
+  
   time *= 0.001;
   const deltaTime = time - previousTime;
   previousTime = time;
